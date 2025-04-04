@@ -1,45 +1,40 @@
-// Complex numbers are entered by the user
-
 #include <iostream>
 using namespace std;
 
 typedef struct complex {
     float real;
     float imag;
-} complexNumber;
+} ComplexStruct;
 
-complexNumber addComplexNumbers(complex, complex);
+ComplexStruct addComplexNumbers(ComplexStruct, ComplexStruct);
+void displayResult(ComplexStruct);
 
 int main() {
-    complexNumber num1, num2, complexSum;
+    ComplexStruct num1, num2, complexSum;
     char signOfImag;
 
-    cout << "For 1st complex number," << endl;
-    cout << "Enter real and imaginary parts respectively:" << endl;
+    cout << "For 1st complex number,\nEnter real and imaginary parts:\n";
     cin >> num1.real >> num1.imag;
 
-    cout << endl
-         << "For 2nd complex number," << endl;
-    cout << "Enter real and imaginary parts respectively:" << endl;
+    cout << "\nFor 2nd complex number,\nEnter real and imaginary parts:\n";
     cin >> num2.real >> num2.imag;
 
-    // Call add function and store result in complexSum
     complexSum = addComplexNumbers(num1, num2);
 
-    // Use Ternary Operator to check the sign of the imaginary number
-    signOfImag = (complexSum.imag > 0) ? '+' : '-';
-
-    // Use Ternary Operator to adjust the sign of the imaginary number
-    complexSum.imag = (complexSum.imag > 0) ? complexSum.imag : -complexSum.imag;
-
-    cout << "Sum = " << complexSum.real << signOfImag << complexSum.imag << "i";
+    displayResult(complexSum);
 
     return 0;
 }
 
-complexNumber addComplexNumbers(complex num1, complex num2) {
-    complex temp;
+ComplexStruct addComplexNumbers(ComplexStruct num1, ComplexStruct num2) {
+    ComplexStruct temp;
     temp.real = num1.real + num2.real;
     temp.imag = num1.imag + num2.imag;
-    return (temp);
+    return temp;
+}
+
+void displayResult(ComplexStruct sum) {
+    char sign = (sum.imag >= 0) ? '+' : '-';
+    float absImag = (sum.imag >= 0) ? sum.imag : -sum.imag;
+    cout << "Sum = " << sum.real << sign << absImag << "i";
 }
